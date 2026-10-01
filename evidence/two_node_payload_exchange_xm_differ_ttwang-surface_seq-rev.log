@@ -1,0 +1,183 @@
+Cross-machine payload exchange
+date:  2026-09-18T07:36:09Z
+host:  ttwang-surface  (MINGW64_NT-10.0-26200-ARM64 3.6.7-fb42d713.x86_64 x86_64)
+go:    go version go1.26.7 windows/arm64
+cgo:   CGO_ENABLED=<default>
+cell:  differ   (this side compiles seq-rev, peer must be seq-fwd)
+tag:   differ-20260918
+dir:   /c/Users/postm/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/differ-20260918
+
+Expectation: A and A' mutual INVALID, B mutual VALID -- the same verdicts
+as on one machine, now with the two nodes on two physical hosts.
+
+== publishing this host's three envelopes ==
+########## publish a  (A   mandatory system call, float path)
+# build tags: e3lite_vulnerable e3lite_reverse
+# test:       TestDFRLTwoNodePayloadExchange
+# env:        DFRL_PAYLOAD_OUT=/c/Users/postm/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/differ-20260918/a__seq-rev__ttwang-surface.json
+=== RUN   TestDFRLTwoNodePayloadExchange
+    api_dfrl_exchange_test.go:118: compiled accumulation order: seq-rev
+    api_dfrl_exchange_test.go:119: genesis hash 0xfd0c765adad518155e4b0c94ef6e5c1af63f0c429d7b95870ec0d4c3fd55d0df; building over parent 0 (0xfd0c765adad518155e4b0c94ef6e5c1af63f0c429d7b95870ec0d4c3fd55d0df)
+    api_dfrl_exchange_test.go:124: own payload: number 1 state root 0xee9f3202a4ae81a45648ef6f662a64274b74eb834816a54e8e9adc7f5eb308e5 block hash 0x2e10ff2892959ba3eadbdc7365abe0374e4afdcb0b072bd608fed91ec841d284
+    api_dfrl_exchange_test.go:132: control: own payload is VALID on its own builder
+    api_dfrl_exchange_test.go:135: wrote own envelope to C:/Users/postm/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/differ-20260918/a__seq-rev__ttwang-surface.json
+--- PASS: TestDFRLTwoNodePayloadExchange (0.04s)
+PASS
+ok  	github.com/ethereum/go-ethereum/eth/catalyst	22.905s
+# launched via: go test
+# exit=0
+
+  A   mandatory system call, float path -> a__seq-rev__ttwang-surface.json
+########## publish ap  (A'  transaction entry point, float path)
+# build tags: e3lite_vulnerable e3lite_reverse
+# test:       TestDFRLTwoNodeTxPathDiverges
+# env:        DFRL_TXV_OUT=/c/Users/postm/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/differ-20260918/ap__seq-rev__ttwang-surface.json
+=== RUN   TestDFRLTwoNodeTxPathDiverges
+    api_dfrl_txpath_test.go:119: compiled accumulation order: seq-rev
+    api_dfrl_txpath_test.go:120: genesis hash 0x1237722a3af3553967a71965c9bf7106c6dcd689d2b6623fcd26ae1821cde202; one agg() call through 0x0000000000000000000000000000000000Badf10 carrying the three submissions as calldata
+    api_dfrl_txpath_test.go:128: own payload: number 1 1 tx state root 0xbb953ab72753cdc844dd0c3a1f744187c6e74ba4431ebb7c390169b416a72822 block hash 0xf5b546a15bce8def2e4cd455ef2d5f2b7cc402a86eb9e49c8aca3f75dc1bb424
+    api_dfrl_txpath_test.go:134: control: own payload is VALID on its own builder
+    api_dfrl_txpath_test.go:137: wrote own envelope to C:/Users/postm/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/differ-20260918/ap__seq-rev__ttwang-surface.json
+--- PASS: TestDFRLTwoNodeTxPathDiverges (0.03s)
+PASS
+ok  	github.com/ethereum/go-ethereum/eth/catalyst	21.053s
+# launched via: go test
+# exit=0
+
+  A'  transaction entry point, float path -> ap__seq-rev__ttwang-surface.json
+########## publish b  (B   transaction entry point, specified path)
+# build tags: e3lite_vulnerable e3lite_reverse
+# test:       TestDFRLTwoNodeDeterministicPathAgrees
+# env:        DFRL_DET_OUT=/c/Users/postm/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/differ-20260918/b__seq-rev__ttwang-surface.json
+=== RUN   TestDFRLTwoNodeDeterministicPathAgrees
+    api_dfrl_defence_test.go:220: compiled accumulation order: seq-rev (unused on the specified path)
+    api_dfrl_defence_test.go:221: genesis hash 0x8e49dc4f2a70fb3cee5308b233170179ce25f63bc678b85f7369000963a62fd7; 3 submissions + 1 aggregation call through 0x0000000000000000000000000000000000C0FFEE
+    api_dfrl_defence_test.go:229: own payload: number 1 4 txs state root 0xec27ebf647dca89f1dc1ad0e5ddc69e20a39572329261681c21b9da05b1c1eeb block hash 0x71c0eb6a8efcce7f9e8febf87aaa032ba3c19c775f13446264dc45e99ffcaac0
+    api_dfrl_defence_test.go:236: control: own payload is VALID on its own builder
+    api_dfrl_defence_test.go:239: wrote own envelope to C:/Users/postm/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/differ-20260918/b__seq-rev__ttwang-surface.json
+--- PASS: TestDFRLTwoNodeDeterministicPathAgrees (0.03s)
+PASS
+ok  	github.com/ethereum/go-ethereum/eth/catalyst	20.833s
+# launched via: go test
+# exit=0
+
+  B   transaction entry point, specified path -> b__seq-rev__ttwang-surface.json
+
+== waiting for the peer and judging ==
+  A   mandatory system call, float path <- a__seq-fwd__HOME-DELL-DESKTOP.json
+     note: peer built with go1.26.5, this host with go1.26.7.
+########## judge a  (A   mandatory system call, float path)
+# build tags: e3lite_vulnerable e3lite_reverse
+# test:       TestDFRLTwoNodePayloadExchange
+# env:        DFRL_PAYLOAD_IN=/c/Users/postm/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/differ-20260918/a__seq-fwd__HOME-DELL-DESKTOP.json DFRL_XM_EXPECT=differ
+=== RUN   TestDFRLTwoNodePayloadExchange
+    api_dfrl_exchange_test.go:118: compiled accumulation order: seq-rev
+    api_dfrl_exchange_test.go:119: genesis hash 0xfd0c765adad518155e4b0c94ef6e5c1af63f0c429d7b95870ec0d4c3fd55d0df; building over parent 0 (0xfd0c765adad518155e4b0c94ef6e5c1af63f0c429d7b95870ec0d4c3fd55d0df)
+    api_dfrl_exchange_test.go:124: own payload: number 1 state root 0xee9f3202a4ae81a45648ef6f662a64274b74eb834816a54e8e9adc7f5eb308e5 block hash 0x2e10ff2892959ba3eadbdc7365abe0374e4afdcb0b072bd608fed91ec841d284
+    api_dfrl_exchange_test.go:132: control: own payload is VALID on its own builder
+    api_dfrl_exchange_test.go:140: peer envelope from C:/Users/postm/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/differ-20260918/a__seq-fwd__HOME-DELL-DESKTOP.json
+    api_dfrl_exchange_test.go:140:   order seq-fwd  host HOME-DELL-DESKTOP (windows/amd64, go1.26.5, 16 cpu)
+    api_dfrl_exchange_test.go:140:   state root 0xca056024dffbc5d470a7323eca05ce912745985bd4eb77b60f2e2597f0a1f3fc  block hash 0x09d9be89f47c4033ba2d4721b8a3962bbed4428cdf7e0b026a7f469a33c90f36
+    api_dfrl_exchange_test.go:140: same parent, different post-state roots: seq-rev 0xee9f3202a4ae81a45648ef6f662a64274b74eb834816a54e8e9adc7f5eb308e5 vs seq-fwd 0xca056024dffbc5d470a7323eca05ce912745985bd4eb77b60f2e2597f0a1f3fc
+    api_dfrl_exchange_test.go:140: peer payload verdict: INVALID (invalid merkle root (remote: ca056024dffbc5d470a7323eca05ce912745985bd4eb77b60f2e2597f0a1f3fc local: ee9f3202a4ae81a45648ef6f662a64274b74eb834816a54e8e9adc7f5eb308e5) dberr: %!w(<nil>))
+    api_dfrl_exchange_test.go:140: RESULT: seq-fwd node (windows/amd64) built a payload the seq-rev node (windows/arm64) rejects, with no field edited between them
+--- PASS: TestDFRLTwoNodePayloadExchange (0.03s)
+PASS
+ok  	github.com/ethereum/go-ethereum/eth/catalyst	19.217s
+# launched via: go test
+# exit=0
+
+     verdict as expected
+  A'  transaction entry point, float path <- ap__seq-fwd__HOME-DELL-DESKTOP.json
+     note: peer built with go1.26.5, this host with go1.26.7.
+########## judge ap  (A'  transaction entry point, float path)
+# build tags: e3lite_vulnerable e3lite_reverse
+# test:       TestDFRLTwoNodeTxPathDiverges
+# env:        DFRL_TXV_IN=/c/Users/postm/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/differ-20260918/ap__seq-fwd__HOME-DELL-DESKTOP.json DFRL_XM_EXPECT=differ
+=== RUN   TestDFRLTwoNodeTxPathDiverges
+    api_dfrl_txpath_test.go:119: compiled accumulation order: seq-rev
+    api_dfrl_txpath_test.go:120: genesis hash 0x1237722a3af3553967a71965c9bf7106c6dcd689d2b6623fcd26ae1821cde202; one agg() call through 0x0000000000000000000000000000000000Badf10 carrying the three submissions as calldata
+    api_dfrl_txpath_test.go:128: own payload: number 1 1 tx state root 0xbb953ab72753cdc844dd0c3a1f744187c6e74ba4431ebb7c390169b416a72822 block hash 0xf5b546a15bce8def2e4cd455ef2d5f2b7cc402a86eb9e49c8aca3f75dc1bb424
+    api_dfrl_txpath_test.go:134: control: own payload is VALID on its own builder
+    api_dfrl_txpath_test.go:142: peer envelope from C:/Users/postm/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/differ-20260918/ap__seq-fwd__HOME-DELL-DESKTOP.json
+    api_dfrl_txpath_test.go:142:   order seq-fwd  host HOME-DELL-DESKTOP (windows/amd64, go1.26.5, 16 cpu)
+    api_dfrl_txpath_test.go:142:   state root 0x57e6611675f10fc6c83ea3d15ccdb062ac2a95e3eb1e9d9b1caf1483ab3ac343  block hash 0xd767e874c306a06a14a1688b9b043201f527a20e816d56261767607976640e9a
+    api_dfrl_txpath_test.go:142: both nodes built byte-identical transaction lists (1 txs)
+    api_dfrl_txpath_test.go:142: same parent, different post-state roots: seq-rev 0xbb953ab72753cdc844dd0c3a1f744187c6e74ba4431ebb7c390169b416a72822 vs seq-fwd 0x57e6611675f10fc6c83ea3d15ccdb062ac2a95e3eb1e9d9b1caf1483ab3ac343
+    api_dfrl_txpath_test.go:142: peer payload verdict: INVALID (invalid receipt root hash (remote: 9277f4dc42533ffed5db3b0015cef1efbafc6c4660feec9a3b6cae5269f4fc4b local: 9912311bbc102120311b21a346848b2a59a4035b0fe46f48b2d8112d0f275943))
+    api_dfrl_txpath_test.go:142: RESULT: seq-fwd node (windows/amd64) built a payload the seq-rev node (windows/arm64) rejects, with no field edited between them
+--- PASS: TestDFRLTwoNodeTxPathDiverges (0.03s)
+PASS
+ok  	github.com/ethereum/go-ethereum/eth/catalyst	18.017s
+# launched via: go test
+# exit=0
+
+     verdict as expected
+  B   transaction entry point, specified path <- b__seq-fwd__HOME-DELL-DESKTOP.json
+     note: peer built with go1.26.5, this host with go1.26.7.
+########## judge b  (B   transaction entry point, specified path)
+# build tags: e3lite_vulnerable e3lite_reverse
+# test:       TestDFRLTwoNodeDeterministicPathAgrees
+# env:        DFRL_DET_IN=/c/Users/postm/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/differ-20260918/b__seq-fwd__HOME-DELL-DESKTOP.json DFRL_XM_EXPECT=differ
+=== RUN   TestDFRLTwoNodeDeterministicPathAgrees
+    api_dfrl_defence_test.go:220: compiled accumulation order: seq-rev (unused on the specified path)
+    api_dfrl_defence_test.go:221: genesis hash 0x8e49dc4f2a70fb3cee5308b233170179ce25f63bc678b85f7369000963a62fd7; 3 submissions + 1 aggregation call through 0x0000000000000000000000000000000000C0FFEE
+    api_dfrl_defence_test.go:229: own payload: number 1 4 txs state root 0xec27ebf647dca89f1dc1ad0e5ddc69e20a39572329261681c21b9da05b1c1eeb block hash 0x71c0eb6a8efcce7f9e8febf87aaa032ba3c19c775f13446264dc45e99ffcaac0
+    api_dfrl_defence_test.go:236: control: own payload is VALID on its own builder
+    api_dfrl_defence_test.go:244: peer envelope from C:/Users/postm/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/differ-20260918/b__seq-fwd__HOME-DELL-DESKTOP.json
+    api_dfrl_defence_test.go:244:   order seq-fwd  host HOME-DELL-DESKTOP (windows/amd64, go1.26.5, 16 cpu)
+    api_dfrl_defence_test.go:244:   state root 0xec27ebf647dca89f1dc1ad0e5ddc69e20a39572329261681c21b9da05b1c1eeb  block hash 0x6479a2cc226b9088f9bd9a5e29439b620476ee0e5db43b8854c1aab020bbc05e
+    api_dfrl_defence_test.go:244: both nodes built byte-identical transaction lists (4 txs)
+    api_dfrl_defence_test.go:244: identical post-state root: 0xec27ebf647dca89f1dc1ad0e5ddc69e20a39572329261681c21b9da05b1c1eeb
+    api_dfrl_defence_test.go:244: peer payload verdict: VALID (<nil>)
+    api_dfrl_defence_test.go:244: RESULT: seq-fwd node (windows/amd64) and seq-rev node (windows/arm64) agree byte for byte and accept each other
+--- PASS: TestDFRLTwoNodeDeterministicPathAgrees (0.04s)
+PASS
+ok  	github.com/ethereum/go-ethereum/eth/catalyst	19.196s
+# launched via: go test
+# exit=0
+
+     verdict as expected
+########## summary (ttwang-surface, cell differ)
+api_dfrl_exchange_test.go:118: compiled accumulation order: seq-rev
+api_dfrl_exchange_test.go:124: own payload: number 1 state root 0xee9f3202a4ae81a45648ef6f662a64274b74eb834816a54e8e9adc7f5eb308e5 block hash 0x2e10ff2892959ba3eadbdc7365abe0374e4afdcb0b072bd608fed91ec841d284
+api_dfrl_exchange_test.go:132: control: own payload is VALID on its own builder
+api_dfrl_txpath_test.go:119: compiled accumulation order: seq-rev
+api_dfrl_txpath_test.go:128: own payload: number 1 1 tx state root 0xbb953ab72753cdc844dd0c3a1f744187c6e74ba4431ebb7c390169b416a72822 block hash 0xf5b546a15bce8def2e4cd455ef2d5f2b7cc402a86eb9e49c8aca3f75dc1bb424
+api_dfrl_txpath_test.go:134: control: own payload is VALID on its own builder
+api_dfrl_defence_test.go:220: compiled accumulation order: seq-rev (unused on the specified path)
+api_dfrl_defence_test.go:229: own payload: number 1 4 txs state root 0xec27ebf647dca89f1dc1ad0e5ddc69e20a39572329261681c21b9da05b1c1eeb block hash 0x71c0eb6a8efcce7f9e8febf87aaa032ba3c19c775f13446264dc45e99ffcaac0
+api_dfrl_defence_test.go:236: control: own payload is VALID on its own builder
+api_dfrl_exchange_test.go:118: compiled accumulation order: seq-rev
+api_dfrl_exchange_test.go:124: own payload: number 1 state root 0xee9f3202a4ae81a45648ef6f662a64274b74eb834816a54e8e9adc7f5eb308e5 block hash 0x2e10ff2892959ba3eadbdc7365abe0374e4afdcb0b072bd608fed91ec841d284
+api_dfrl_exchange_test.go:132: control: own payload is VALID on its own builder
+api_dfrl_exchange_test.go:140:   order seq-fwd  host HOME-DELL-DESKTOP (windows/amd64, go1.26.5, 16 cpu)
+api_dfrl_exchange_test.go:140: same parent, different post-state roots: seq-rev 0xee9f3202a4ae81a45648ef6f662a64274b74eb834816a54e8e9adc7f5eb308e5 vs seq-fwd 0xca056024dffbc5d470a7323eca05ce912745985bd4eb77b60f2e2597f0a1f3fc
+api_dfrl_exchange_test.go:140: peer payload verdict: INVALID (invalid merkle root (remote: ca056024dffbc5d470a7323eca05ce912745985bd4eb77b60f2e2597f0a1f3fc local: ee9f3202a4ae81a45648ef6f662a64274b74eb834816a54e8e9adc7f5eb308e5) dberr: %!w(<nil>))
+api_dfrl_exchange_test.go:140: RESULT: seq-fwd node (windows/amd64) built a payload the seq-rev node (windows/arm64) rejects, with no field edited between them
+api_dfrl_txpath_test.go:119: compiled accumulation order: seq-rev
+api_dfrl_txpath_test.go:128: own payload: number 1 1 tx state root 0xbb953ab72753cdc844dd0c3a1f744187c6e74ba4431ebb7c390169b416a72822 block hash 0xf5b546a15bce8def2e4cd455ef2d5f2b7cc402a86eb9e49c8aca3f75dc1bb424
+api_dfrl_txpath_test.go:134: control: own payload is VALID on its own builder
+api_dfrl_txpath_test.go:142:   order seq-fwd  host HOME-DELL-DESKTOP (windows/amd64, go1.26.5, 16 cpu)
+api_dfrl_txpath_test.go:142: both nodes built byte-identical transaction lists (1 txs)
+api_dfrl_txpath_test.go:142: same parent, different post-state roots: seq-rev 0xbb953ab72753cdc844dd0c3a1f744187c6e74ba4431ebb7c390169b416a72822 vs seq-fwd 0x57e6611675f10fc6c83ea3d15ccdb062ac2a95e3eb1e9d9b1caf1483ab3ac343
+api_dfrl_txpath_test.go:142: peer payload verdict: INVALID (invalid receipt root hash (remote: 9277f4dc42533ffed5db3b0015cef1efbafc6c4660feec9a3b6cae5269f4fc4b local: 9912311bbc102120311b21a346848b2a59a4035b0fe46f48b2d8112d0f275943))
+api_dfrl_txpath_test.go:142: RESULT: seq-fwd node (windows/amd64) built a payload the seq-rev node (windows/arm64) rejects, with no field edited between them
+api_dfrl_defence_test.go:220: compiled accumulation order: seq-rev (unused on the specified path)
+api_dfrl_defence_test.go:229: own payload: number 1 4 txs state root 0xec27ebf647dca89f1dc1ad0e5ddc69e20a39572329261681c21b9da05b1c1eeb block hash 0x71c0eb6a8efcce7f9e8febf87aaa032ba3c19c775f13446264dc45e99ffcaac0
+api_dfrl_defence_test.go:236: control: own payload is VALID on its own builder
+api_dfrl_defence_test.go:244:   order seq-fwd  host HOME-DELL-DESKTOP (windows/amd64, go1.26.5, 16 cpu)
+api_dfrl_defence_test.go:244: both nodes built byte-identical transaction lists (4 txs)
+api_dfrl_defence_test.go:244: identical post-state root: 0xec27ebf647dca89f1dc1ad0e5ddc69e20a39572329261681c21b9da05b1c1eeb
+api_dfrl_defence_test.go:244: peer payload verdict: VALID (<nil>)
+api_dfrl_defence_test.go:244: RESULT: seq-fwd node (windows/amd64) and seq-rev node (windows/arm64) agree byte for byte and accept each other
+
+
+differ cell passed on ttwang-surface: mutual rejection on both unspecified paths
+and mutual acceptance on the specified one, with the two nodes on two
+physical hosts.
+Now run the other cell if you have not:  --cell same-order
+
+log: /c/Users/postm/Dropbox/ProjectsWorkingSpace/silent-forks/evidence/two_node_payload_exchange_xm_differ_ttwang-surface_seq-rev.log
+The peer host writes its own log; both are needed, since each side's log
+records only the verdicts that side reached.

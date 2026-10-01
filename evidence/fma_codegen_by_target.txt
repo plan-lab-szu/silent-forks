@@ -1,0 +1,7 @@
+# Fused multiply-add instructions emitted in dfrl-agg package codegen, by target
+# GOOS=linux GOARCH=$a go build -gcflags=-S .   (recorded 2026-08-28)
+
+linux/amd64: 0 FMA instructions
+linux/arm64: 2 FMA instructions
+        1 FMADDD
+        1 FMADDS

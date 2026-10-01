@@ -1,0 +1,15 @@
+# Mandatory-boundary divergence across two independently built binaries.
+# Produced 2026-09-01 on windows/amd64, Go go1.26.5, geth pin 02b73d4e.
+# Same machine, same architecture, byte-identical genesis state and contract bytecode,
+# empty transaction list, same height (2K, K=32) and same parent.
+# The ONLY difference is the accumulation order compiled into the 0x0103 precompile.
+#
+#   go test -tags e3lite_vulnerable                  -run TestMandatoryVulnAggPostStateRoot ./core/
+#   go test -tags 'e3lite_vulnerable e3lite_reverse' -run TestMandatoryVulnAggPostStateRoot ./core/
+
+order    post-state-root                                                     aggregate-commitment
+seq-fwd 0xed1ea05bf71a4c22c45966214a0ae1afa1a9a5a4544d702748aeca159628f4b1 0x9c15b62f09ab321600c1f424c32164b559ffa4939a9430d4bcbb537b536689b5
+seq-rev 0x7f6373be5bf958f0599b4a60993b115651545d18c63af99c9fa4b82249e8784f 0xf497ca6308418976dd20c3e6bb6e79dba7b01c483054d59a5484707073bb72a1
+
+# Forward and reverse roots differ, so a validator running one build rejects the
+# other's block at this boundary. The Engine API verdict is in engine_invalid_payload.log.

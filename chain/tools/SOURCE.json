@@ -1,0 +1,9 @@
+{
+  "solc": {
+    "url": "https://github.com/argotorg/solidity/releases/download/v0.8.36/solc-windows.exe",
+    "version": "0.8.36+commit.8a079791.Windows.msvc",
+    "size_bytes": 9864704,
+    "sha256": "38cf5df656da822cf88b854cf736475a196c679f4f5f3f15ddd8c85ce5dbb36a",
+    "note": "Solidity project maintenance moved to Argot Collective (argotorg/solidity); the ethereum/solidity GitHub API transparently resolves releases there as of 2026-08."
+  }
+}

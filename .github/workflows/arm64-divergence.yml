@@ -1,0 +1,32 @@
+name: arm64 float divergence check
+
+# Runs the cross-architecture comparison as native execution rather than only
+# inspecting compiled instructions. The two jobs execute the same tests on
+# arm64 and amd64 so their logs can be compared directly.
+#
+# Manual trigger only: this is evidence-gathering, not a merge gate.
+on:
+  workflow_dispatch: {}
+
+jobs:
+  divergence:
+    strategy:
+      matrix:
+        runner: [ubuntu-24.04-arm, ubuntu-24.04]
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+      - name: platform info
+        run: go env GOOS GOARCH; uname -a
+      - name: run TestFloatDivergenceReport
+        working-directory: dfrl-agg
+        run: go test -run TestFloatDivergenceReport -v ./...
+      - name: run TestIntegerPathInvariantToStrategyChoice
+        working-directory: dfrl-agg
+        run: go test -run TestIntegerPathInvariantToStrategyChoice -v ./...
+      - name: run TestMinimalCounterexample
+        working-directory: dfrl-agg
+        run: go test -run TestMinimalCounterexample -v ./...

@@ -1,0 +1,23 @@
+# Randomized cross-language differential conformance suite.
+# Produced 2026-09-01 on windows/amd64, Go go1.26.5, Python 3.12.10.
+#
+# Go side generates 2000 randomized VALID cases from a fixed master seed
+# (dfrl-agg/differential_test.go) and writes vectors/differential.json in the
+# same schema as the nine curated vectors. The independent Python reference
+# (pyref/, zero shared code, zero shared dependencies) recomputes every root.
+
+=== curated (9) ===
+------------------------------------------------------------------------
+9/9 cases byte-identical across Go and Python
+
+=== randomized (2000) ===
+------------------------------------------------------------------------
+2000/2000 cases byte-identical across Go and Python
+
+=== MUTATION SENSITIVITY ===
+# A suite that cannot fail proves nothing. Injecting ties-away-from-zero in
+# place of ties-to-even in the Python reference -- the subtlest deviation the
+# rounding rule admits -- was detected as:
+#     curated:    5/9 match    (4 caught)
+#     randomized: 1738/2000 match (262 caught)
+# The reference was restored and re-verified byte-identical to its pristine copy.

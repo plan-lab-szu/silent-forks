@@ -1,0 +1,51 @@
+# TestAttackerClosure -- threat-model closure: honest updates fixed, one unprivileged client chooses only its own submission.
+# Produced 2026-09-01 on windows/amd64, Go go1.26.5.
+# Honest updates are real federated-MNIST rounds from fl-workload/runs/x4_export (N=10, P=7850, F=20).
+# Baseline windows are NON-DEGENERATE: all 10 clients hold 10 distinct values, yet all 6 conforming strategies agree.
+# Perturbations are in quantization steps (2^-20), not ULPs, so no witness can be dismissed as erased by quantization.
+
+=== RUN   TestAttackerClosure
+=== RUN   TestAttackerClosure/round0
+    attacker_closure2_test.go:75: window off=384   honest population: 10/10 distinct values, 1 state root (healthy)
+    attacker_closure2_test.go:77:     attacker = client 1, its honest value -0.00903129578
+    attacker_closure2_test.go:80:     minimal attack: d=+1 step(s) -> -0.0090303421  =>  2 distinct roots, groups [[seq-fwd seq-rev blocked-4 fused-mul] [pairwise float64-acc]]
+    attacker_closure2_test.go:85:     split density: 3358/4000 legal nearby submissions split the validators (84.0%)
+    attacker_closure2_test.go:75: window off=387   honest population: 10/10 distinct values, 1 state root (healthy)
+    attacker_closure2_test.go:77:     attacker = client 2, its honest value 0.0111236572
+    attacker_closure2_test.go:80:     minimal attack: d=+1 step(s) -> 0.0111246109  =>  2 distinct roots, groups [[seq-fwd blocked-4 fused-mul] [seq-rev pairwise float64-acc]]
+    attacker_closure2_test.go:85:     split density: 3047/4000 legal nearby submissions split the validators (76.2%)
+    attacker_closure2_test.go:75: window off=391   honest population: 10/10 distinct values, 1 state root (healthy)
+    attacker_closure2_test.go:77:     attacker = client 3, its honest value 0.00770282745
+    attacker_closure2_test.go:80:     minimal attack: d=-1 step(s) -> 0.00770187378  =>  3 distinct roots, groups [[seq-fwd pairwise fused-mul] [seq-rev float64-acc] [blocked-4]]
+    attacker_closure2_test.go:85:     split density: 2651/4000 legal nearby submissions split the validators (66.3%)
+=== RUN   TestAttackerClosure/round2
+    attacker_closure2_test.go:75: window off=372   honest population: 10/10 distinct values, 1 state root (healthy)
+    attacker_closure2_test.go:77:     attacker = client 1, its honest value -0.00595378876
+    attacker_closure2_test.go:80:     minimal attack: d=+1 step(s) -> -0.00595283508  =>  2 distinct roots, groups [[seq-fwd seq-rev pairwise fused-mul] [blocked-4 float64-acc]]
+    attacker_closure2_test.go:85:     split density: 2123/4000 legal nearby submissions split the validators (53.1%)
+    attacker_closure2_test.go:75: window off=374   honest population: 10/10 distinct values, 1 state root (healthy)
+    attacker_closure2_test.go:77:     attacker = client 2, its honest value -0.0143432617
+    attacker_closure2_test.go:80:     minimal attack: d=+1 step(s) -> -0.014342308  =>  2 distinct roots, groups [[seq-fwd pairwise fused-mul] [seq-rev blocked-4 float64-acc]]
+    attacker_closure2_test.go:85:     split density: 2776/4000 legal nearby submissions split the validators (69.4%)
+    attacker_closure2_test.go:75: window off=412   honest population: 10/10 distinct values, 1 state root (healthy)
+    attacker_closure2_test.go:77:     attacker = client 3, its honest value -0.0125398636
+    attacker_closure2_test.go:80:     minimal attack: d=+1 step(s) -> -0.0125389099  =>  3 distinct roots, groups [[seq-fwd pairwise fused-mul] [seq-rev] [blocked-4 float64-acc]]
+    attacker_closure2_test.go:85:     split density: 3404/4000 legal nearby submissions split the validators (85.1%)
+=== RUN   TestAttackerClosure/round4
+    attacker_closure2_test.go:75: window off=382   honest population: 10/10 distinct values, 1 state root (healthy)
+    attacker_closure2_test.go:77:     attacker = client 1, its honest value -0.00118255615
+    attacker_closure2_test.go:80:     minimal attack: d=+1 step(s) -> -0.00118160248  =>  2 distinct roots, groups [[seq-fwd pairwise blocked-4 fused-mul] [seq-rev float64-acc]]
+    attacker_closure2_test.go:85:     split density: 2702/4000 legal nearby submissions split the validators (67.5%)
+    attacker_closure2_test.go:75: window off=386   honest population: 10/10 distinct values, 1 state root (healthy)
+    attacker_closure2_test.go:77:     attacker = client 2, its honest value 0.0040473938
+    attacker_closure2_test.go:80:     minimal attack: d=+1 step(s) -> 0.00404834747  =>  2 distinct roots, groups [[seq-fwd seq-rev fused-mul] [pairwise blocked-4 float64-acc]]
+    attacker_closure2_test.go:85:     split density: 2482/4000 legal nearby submissions split the validators (62.0%)
+    attacker_closure2_test.go:75: window off=392   honest population: 10/10 distinct values, 1 state root (healthy)
+    attacker_closure2_test.go:77:     attacker = client 3, its honest value -0.00212097168
+    attacker_closure2_test.go:80:     minimal attack: d=+1 step(s) -> -0.00212001801  =>  3 distinct roots, groups [[seq-fwd blocked-4 float64-acc fused-mul] [seq-rev] [pairwise]]
+    attacker_closure2_test.go:85:     split density: 2438/4000 legal nearby submissions split the validators (61.0%)
+--- PASS: TestAttackerClosure (0.22s)
+    --- PASS: TestAttackerClosure/round0 (0.06s)
+    --- PASS: TestAttackerClosure/round2 (0.08s)
+    --- PASS: TestAttackerClosure/round4 (0.08s)
+PASS

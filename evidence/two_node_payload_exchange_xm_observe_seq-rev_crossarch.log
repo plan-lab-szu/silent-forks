@@ -1,0 +1,47 @@
+Cross-architecture observation: the SAME accumulation order on two hosts
+date: 2026-09-18T08:07:05Z
+this host: HOME-DELL-DESKTOP go version go1.26.5 windows/amd64
+peer:      ttwang-surface windows/arm64 go1.26.7 (envelopes from the differ-20260918 exchange)
+
+Companion to evidence/two_node_payload_exchange_xm_same-order_*.log, which
+records that seq-fwd is byte-stable across these two hosts. This log records
+the same test for seq-rev, where it is NOT. Recorded in observe mode, so the
+roots are measured rather than asserted.
+
+########## a  (TestDFRLTwoNodePayloadExchange)
+=== RUN   TestDFRLTwoNodePayloadExchange
+    api_dfrl_exchange_test.go:118: compiled accumulation order: seq-rev
+    api_dfrl_exchange_test.go:119: genesis hash 0xfd0c765adad518155e4b0c94ef6e5c1af63f0c429d7b95870ec0d4c3fd55d0df; building over parent 0 (0xfd0c765adad518155e4b0c94ef6e5c1af63f0c429d7b95870ec0d4c3fd55d0df)
+    api_dfrl_exchange_test.go:124: own payload: number 1 state root 0x89197e4cb8dccd691f2c2157f4f48254674132fe85572f314b57d5daa462bcb0 block hash 0x779bac61f3e793fea8c71b3496db393e7c9326ebdeb94d3b47fc1315707232b2
+    api_dfrl_exchange_test.go:132: control: own payload is VALID on its own builder
+    api_dfrl_exchange_test.go:140: peer envelope from C:/Users/wangt/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/differ-20260918/a__seq-rev__ttwang-surface.json
+    api_dfrl_exchange_test.go:140:   order seq-rev  host ttwang-surface (windows/arm64, go1.26.7, 12 cpu)
+    api_dfrl_exchange_test.go:140:   state root 0xee9f3202a4ae81a45648ef6f662a64274b74eb834816a54e8e9adc7f5eb308e5  block hash 0x2e10ff2892959ba3eadbdc7365abe0374e4afdcb0b072bd608fed91ec841d284
+    api_dfrl_exchange_test.go:140: same-order OBSERVATION (not attribution: the hosts differ in more than the order): seq-rev on windows/arm64 vs windows/amd64
+    api_dfrl_exchange_test.go:140: OBSERVED roots: seq-rev on windows/arm64 0xee9f3202a4ae81a45648ef6f662a64274b74eb834816a54e8e9adc7f5eb308e5 vs seq-rev on windows/amd64 0x89197e4cb8dccd691f2c2157f4f48254674132fe85572f314b57d5daa462bcb0 -- DIFFERENT
+    api_dfrl_exchange_test.go:140: OBSERVED verdict: INVALID (invalid merkle root (remote: ee9f3202a4ae81a45648ef6f662a64274b74eb834816a54e8e9adc7f5eb308e5 local: 89197e4cb8dccd691f2c2157f4f48254674132fe85572f314b57d5daa462bcb0) dberr: %!w(<nil>))
+    api_dfrl_exchange_test.go:140: OBSERVATION: two hosts compiling seq-rev, differing in architecture (windows/arm64 vs windows/amd64), produced differing post-state roots. This characterises this pair of hosts. It does NOT attribute anything to the accumulation order, because the order is not the only thing held fixed here.
+--- PASS: TestDFRLTwoNodePayloadExchange (0.02s)
+PASS
+ok  	github.com/ethereum/go-ethereum/eth/catalyst	20.410s
+# exit=0
+
+########## ap  (TestDFRLTwoNodeTxPathDiverges)
+=== RUN   TestDFRLTwoNodeTxPathDiverges
+    api_dfrl_txpath_test.go:119: compiled accumulation order: seq-rev
+    api_dfrl_txpath_test.go:120: genesis hash 0x1237722a3af3553967a71965c9bf7106c6dcd689d2b6623fcd26ae1821cde202; one agg() call through 0x0000000000000000000000000000000000Badf10 carrying the three submissions as calldata
+    api_dfrl_txpath_test.go:128: own payload: number 1 1 tx state root 0x908a02a8d88a1aeab22d54b3160ecd866fb8897720180edf5796de516c823af5 block hash 0x055ec1dfba2ae8af1be123036c47eb4be9c3ecf473abc2592dd7f377eb4673f6
+    api_dfrl_txpath_test.go:134: control: own payload is VALID on its own builder
+    api_dfrl_txpath_test.go:142: peer envelope from C:/Users/wangt/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/differ-20260918/ap__seq-rev__ttwang-surface.json
+    api_dfrl_txpath_test.go:142:   order seq-rev  host ttwang-surface (windows/arm64, go1.26.7, 12 cpu)
+    api_dfrl_txpath_test.go:142:   state root 0xbb953ab72753cdc844dd0c3a1f744187c6e74ba4431ebb7c390169b416a72822  block hash 0xf5b546a15bce8def2e4cd455ef2d5f2b7cc402a86eb9e49c8aca3f75dc1bb424
+    api_dfrl_txpath_test.go:142: same-order OBSERVATION (not attribution: the hosts differ in more than the order): seq-rev on windows/arm64 vs windows/amd64
+    api_dfrl_txpath_test.go:142: both nodes built byte-identical transaction lists (1 txs)
+    api_dfrl_txpath_test.go:142: OBSERVED roots: seq-rev on windows/arm64 0xbb953ab72753cdc844dd0c3a1f744187c6e74ba4431ebb7c390169b416a72822 vs seq-rev on windows/amd64 0x908a02a8d88a1aeab22d54b3160ecd866fb8897720180edf5796de516c823af5 -- DIFFERENT
+    api_dfrl_txpath_test.go:142: OBSERVED verdict: INVALID (invalid receipt root hash (remote: 9912311bbc102120311b21a346848b2a59a4035b0fe46f48b2d8112d0f275943 local: 9be68a85c315b11cbc300ef5fd316d5b3d5036df3db15e94fea02f5fb2892b6d))
+    api_dfrl_txpath_test.go:142: OBSERVATION: two hosts compiling seq-rev, differing in architecture (windows/arm64 vs windows/amd64), produced differing post-state roots. This characterises this pair of hosts. It does NOT attribute anything to the accumulation order, because the order is not the only thing held fixed here.
+--- PASS: TestDFRLTwoNodeTxPathDiverges (0.03s)
+PASS
+ok  	github.com/ethereum/go-ethereum/eth/catalyst	15.742s
+# exit=0
+

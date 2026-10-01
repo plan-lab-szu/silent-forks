@@ -1,0 +1,35 @@
+# E3-lite re-run on a SECOND, unrelated substrate - 2026-08-28
+#
+# The 2026-08-27 run (evidence/e3lite_arm64_vs_amd64.log) used Docker Desktop:
+# two debian:bookworm-slim containers, linux/arm64 native and linux/amd64 under
+# QEMU. This run uses no Docker at all: two native Windows geth processes on the
+# same host, GOOS=windows GOARCH=arm64 running natively and GOOS=windows
+# GOARCH=amd64 running under the host's x86 translation layer (Windows on ARM,
+# Snapdragon X Elite X1E80100).
+#
+# Both nodes: geth commit b2548e97, -tags e3lite_vulnerable, same genesis.json
+# (chainId 1337, dfrlTime 0, genesis hash bdd3b3..843cbd on both), started with
+# `geth init` + `--dev --dev.period 1 --ipcdisable --port 0 --nodiscover`.
+# web3_clientVersion self-report:
+#   :8700 Geth/v1.17.6-unstable-b2548e97-20260827/windows-arm64/go1.26.7
+#   :8701 Geth/v1.17.6-unstable-b2548e97-20260827/windows-amd64/go1.26.7
+#
+# RESULT: the precompile outputs and the contract-committed roots are
+# BYTE-IDENTICAL to the 2026-08-27 Docker/QEMU/Linux run. The block state roots
+# are NOT, and are not expected to be: a block state root commits block number,
+# gas used and fee recipient balance, which differ between runs (that run
+# reached block 0xac/0x4f, this one 0x1d/0x18). The aggregation result is the
+# reproducible quantity; the block state root is not.
+
+2026/08/28 19:47:11 deployed VulnerableWrapper at 0xF2E246BB76DF876Cef8b38ae84130F4F55De395b on both nodes
+2026/08/28 19:47:11 arm64  block=0x1d committedRoot=0x3358dea7c7b9d26d4c11dad9638639c920956a5a890f8f87484f788b7a66deca stateRoot=0x04e8ec18d8240ba13c3ef3a39e9383681f3780e32ea8475067410b94be86436a
+2026/08/28 19:47:12 amd64  block=0x18 committedRoot=0xe6bc1abc179d21c5cd4a2bf2b1b36624446e8205ded987f9c51a2162f181a546 stateRoot=0x78621ff9bf9266a8c380b8d2ae72538fea6cadb94ef1e0b4f81acbd0b35fab37
+2026/08/28 19:47:12 === RESULT: DIVERGENCE. arm64 committedRoot=0x3358dea7c7b9d26d4c11dad9638639c920956a5a890f8f87484f788b7a66deca amd64 committedRoot=0xe6bc1abc179d21c5cd4a2bf2b1b36624446e8205ded987f9c51a2162f181a546 ===
+2026/08/28 19:47:12 raw outputs: arm64=...3c8888de00000000000000000000000000000000000000000000000000000000  amd64=...3c8888df00000000000000000000000000000000000000000000000000000000
+
+# Cross-run comparison of the reproducible quantities:
+#                      2026-08-27 (Docker/QEMU/Linux)        2026-08-28 (native Windows)
+#   arm64 committed    0x3358dea7...a66deca                  0x3358dea7...a66deca   IDENTICAL
+#   amd64 committed    0xe6bc1abc...f181a546                 0xe6bc1abc...f181a546  IDENTICAL
+#   arm64 precompile   0x3c8888de                            0x3c8888de             IDENTICAL
+#   amd64 precompile   0x3c8888df                            0x3c8888df             IDENTICAL

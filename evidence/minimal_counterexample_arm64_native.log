@@ -1,0 +1,27 @@
+# TestMinimalCounterexample — native arm64 (Windows on ARM, Snapdragon X Elite)
+# go test -run TestMinimalCounterexample -v
+# recorded 2026-08-28
+
+=== RUN   TestMinimalCounterexample
+    minimal_counterexample_test.go:83: platform windows/arm64, per-cell budget 2000000 assignments
+    minimal_counterexample_test.go:117: seq-fwd vs fused-mul: N=3,P=1 searched 16739 assignments before hitting a witness
+    minimal_counterexample_test.go:137: seq-fwd vs fused-mul: minimal witness N=3 P=1
+    minimal_counterexample_test.go:139:   client 0: weight=2 theta=[-0.1]
+    minimal_counterexample_test.go:139:   client 1: weight=3 theta=[0.1]
+    minimal_counterexample_test.go:139:   client 2: weight=1 theta=[9.536743e-07]
+    minimal_counterexample_test.go:141:   root(seq-fwd)=a41cf86a130a4deb  root(fused-mul)=61a16cfce505507d  max|diff|=1.863e-09
+    minimal_counterexample_test.go:117: seq-fwd vs float64-acc: N=3,P=1 searched 21 assignments before hitting a witness
+    minimal_counterexample_test.go:137: seq-fwd vs float64-acc: minimal witness N=3 P=1
+    minimal_counterexample_test.go:139:   client 0: weight=3 theta=[1.1920929e-07]
+    minimal_counterexample_test.go:139:   client 1: weight=1 theta=[1]
+    minimal_counterexample_test.go:139:   client 2: weight=1 theta=[1]
+    minimal_counterexample_test.go:141:   root(seq-fwd)=f39e457a3da7ede4  root(float64-acc)=fd39ac6ebb685b9e  max|diff|=2.980e-08
+    minimal_counterexample_test.go:117: seq-fwd vs seq-rev: N=3,P=1 searched 136 assignments before hitting a witness
+    minimal_counterexample_test.go:137: seq-fwd vs seq-rev: minimal witness N=3 P=1
+    minimal_counterexample_test.go:139:   client 0: weight=1 theta=[-5.9604645e-08]
+    minimal_counterexample_test.go:139:   client 1: weight=1 theta=[-1]
+    minimal_counterexample_test.go:139:   client 2: weight=1 theta=[1]
+    minimal_counterexample_test.go:141:   root(seq-fwd)=8b0a2385d83c8bf7  root(seq-rev)=aa543e5d933fafb4  max|diff|=1.987e-08
+--- PASS: TestMinimalCounterexample (0.00s)
+PASS
+ok  	dfrl-agg	0.213s

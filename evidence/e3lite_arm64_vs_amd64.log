@@ -1,0 +1,16 @@
+2026/08/27 17:10:21 deployed VulnerableWrapper at 0xF2E246BB76DF876Cef8b38ae84130F4F55De395b on both nodes
+2026/08/27 17:10:22 arm64  block=0xac committedRoot=0x3358dea7c7b9d26d4c11dad9638639c920956a5a890f8f87484f788b7a66deca stateRoot=0x0ad61d493693c0d0652b76d766cccd673cb7443fc67cfc883dfcf2af90d2ca63
+2026/08/27 17:10:22 amd64  block=0x4f committedRoot=0xe6bc1abc179d21c5cd4a2bf2b1b36624446e8205ded987f9c51a2162f181a546 stateRoot=0x95df5968c441763e256d2a7a8707e568b3ebd10e16f4a0ed85d491dd1174cb83
+2026/08/27 17:10:22 === RESULT: DIVERGENCE. arm64 committedRoot=0x3358dea7c7b9d26d4c11dad9638639c920956a5a890f8f87484f788b7a66deca amd64 committedRoot=0xe6bc1abc179d21c5cd4a2bf2b1b36624446e8205ded987f9c51a2162f181a546 ===
+2026/08/27 17:10:22 Two independently-running geth processes, identical signed transaction, identical genesis, differing only in CPU architecture, committed DIFFERENT state for the same block. A validator receiving the other's block via engine_newPayload would compute a different state root than the one the block header claims, and would reject it as INVALID.
+2026/08/27 17:10:22 raw outputs: arm64=3358dea7c7b9d26d4c11dad9638639c920956a5a890f8f87484f788b7a66deca000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000043c8888de00000000000000000000000000000000000000000000000000000000 amd64=e6bc1abc179d21c5cd4a2bf2b1b36624446e8205ded987f9c51a2162f181a546000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000043c8888df00000000000000000000000000000000000000000000000000000000
+
+--- Environment (2026-08-27) ---
+Host: Windows 11 on ARM64 (Qualcomm Snapdragon X Elite X1E80100), Docker Desktop 4.88.1, WSL2 backend
+arm64 node: --platform linux/arm64 (native), debian:bookworm-slim container, geth-vuln-arm64 (GOARCH=arm64 cross-compile, commit b2548e97)
+amd64 node: --platform linux/amd64 (QEMU emulation via Docker Desktop), same base image, geth-vuln-amd64 (GOARCH=amd64 cross-compile, same commit)
+Both nodes: identical genesis.json (dfrlTime=0, chainId=1337), started via `geth init` + `geth --dev --dev.period 1`, no p2p between them
+Witness: dfrl-agg/minimal_counterexample_test.go's seq-fwd vs fused-mul minimal counterexample -- N=3, P=1, weights=[2,3,1], theta=[-0.1, 0.1, 2^-20]
+Preceded by a direct eth_call to 0x...0103 confirming the raw precompile output already differs at the RPC layer before any contract/state involvement:
+  arm64 eth_call result: 0x3c8888de  (=0.016666826)
+  amd64 eth_call result: 0x3c8888df  (1-ULP different)

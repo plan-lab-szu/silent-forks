@@ -1,0 +1,23 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+venv/
+
+# Downloaded data and generated experiment outputs
+fl-workload/data/
+fl-workload/runs/scope_export/
+dfrl-agg/vectors/differential.json
+xm-exchange/
+
+# Local binaries and build output
+*.exe
+dfrl-agg/dfrl-agg
+dfrl-agg/dfrl-agg.exe
+chain/geth/build/bin/
+
+# Local editor and test caches
+.idea/
+.vscode/
+.pytest_cache/
+coverage.out

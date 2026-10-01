@@ -1,0 +1,16 @@
+# engine_newPayload returns INVALID for a payload whose state root disagrees with local re-execution.
+# Produced 2026-09-01 on windows/amd64, Go go1.26.5.
+# The substituted root is the one the seq-rev build actually committed (see
+# mandatory_aggregation_divergence.log); the payload's block hash is recomputed after
+# substitution, so it CANNOT be rejected for a header/hash mismatch -- the rejection
+# has to come from re-execution.
+
+=== RUN   TestDFRLDivergentStateRootIsINVALID
+    api_dfrl_invalid_test.go:62: control: node's own payload over parent 0x38e7e7a36fc1f162e8cc0c3553b981bc3122e388830caeec1c74c426d8a27512 is VALID
+    api_dfrl_invalid_test.go:63:          its state root 0xcdbea1495d13443c7b6bb85c618d3a91f781cd40d992f5afba9f903633f27214
+    api_dfrl_invalid_test.go:78: divergent payload: state root 0x7f6373be5bf958f0599b4a60993b115651545d18c63af99c9fa4b82249e8784f
+    api_dfrl_invalid_test.go:79:                    engine_newPayload -> INVALID
+    api_dfrl_invalid_test.go:81:                    validationError: invalid merkle root (remote: 7f6373be5bf958f0599b4a60993b115651545d18c63af99c9fa4b82249e8784f local: cdbea1495d13443c7b6bb85c618d3a91f781cd40d992f5afba9f903633f27214) dberr: %!w(<nil>)
+--- PASS: TestDFRLDivergentStateRootIsINVALID (0.09s)
+PASS
+ok  	github.com/ethereum/go-ethereum/eth/catalyst	(cached)

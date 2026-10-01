@@ -1,0 +1,218 @@
+Cross-machine payload exchange
+date:  2026-09-18T08:13:01Z
+host:  HOME-DELL-DESKTOP  (MINGW64_NT-10.0-26200 3.6.9-b4195d69.x86_64 x86_64)
+go:    go version go1.26.5 windows/amd64
+cgo:   CGO_ENABLED=<default>
+cell:  same-order   (this side compiles seq-fwd, peer must be seq-fwd)
+tag:   same-order-20260918
+dir:   /c/Users/wangt/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/same-order-20260918
+
+Expectation: agreement in all three experiments, float path included.
+This cell is what attributes the differ cell's divergence to the compiled
+order rather than to the host. The cell is asymmetric: conclusive when it
+passes, inconclusive when it fails. Agreement between hosts that differ in
+architecture and toolchain as well is stronger than a same-architecture
+pass, because more varied and the commitment still did not move.
+
+== publishing this host's three envelopes ==
+########## publish a  (A   mandatory system call, float path)
+# build tags: e3lite_vulnerable
+# test:       TestDFRLTwoNodePayloadExchange
+# env:        DFRL_PAYLOAD_OUT=/c/Users/wangt/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/same-order-20260918/a__seq-fwd__HOME-DELL-DESKTOP.json
+=== RUN   TestDFRLTwoNodePayloadExchange
+    api_dfrl_exchange_test.go:118: compiled accumulation order: seq-fwd
+    api_dfrl_exchange_test.go:119: genesis hash 0xfd0c765adad518155e4b0c94ef6e5c1af63f0c429d7b95870ec0d4c3fd55d0df; building over parent 0 (0xfd0c765adad518155e4b0c94ef6e5c1af63f0c429d7b95870ec0d4c3fd55d0df)
+    api_dfrl_exchange_test.go:124: own payload: number 1 state root 0xca056024dffbc5d470a7323eca05ce912745985bd4eb77b60f2e2597f0a1f3fc block hash 0x09d9be89f47c4033ba2d4721b8a3962bbed4428cdf7e0b026a7f469a33c90f36
+    api_dfrl_exchange_test.go:132: control: own payload is VALID on its own builder
+    api_dfrl_exchange_test.go:135: wrote own envelope to C:/Users/wangt/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/same-order-20260918/a__seq-fwd__HOME-DELL-DESKTOP.json
+--- PASS: TestDFRLTwoNodePayloadExchange (0.03s)
+PASS
+ok  	github.com/ethereum/go-ethereum/eth/catalyst	15.703s
+# launched via: go test
+# exit=0
+
+  A   mandatory system call, float path -> a__seq-fwd__HOME-DELL-DESKTOP.json
+########## publish ap  (A'  transaction entry point, float path)
+# build tags: e3lite_vulnerable
+# test:       TestDFRLTwoNodeTxPathDiverges
+# env:        DFRL_TXV_OUT=/c/Users/wangt/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/same-order-20260918/ap__seq-fwd__HOME-DELL-DESKTOP.json
+=== RUN   TestDFRLTwoNodeTxPathDiverges
+    api_dfrl_txpath_test.go:119: compiled accumulation order: seq-fwd
+    api_dfrl_txpath_test.go:120: genesis hash 0x1237722a3af3553967a71965c9bf7106c6dcd689d2b6623fcd26ae1821cde202; one agg() call through 0x0000000000000000000000000000000000Badf10 carrying the three submissions as calldata
+    api_dfrl_txpath_test.go:128: own payload: number 1 1 tx state root 0x57e6611675f10fc6c83ea3d15ccdb062ac2a95e3eb1e9d9b1caf1483ab3ac343 block hash 0xd767e874c306a06a14a1688b9b043201f527a20e816d56261767607976640e9a
+    api_dfrl_txpath_test.go:134: control: own payload is VALID on its own builder
+    api_dfrl_txpath_test.go:137: wrote own envelope to C:/Users/wangt/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/same-order-20260918/ap__seq-fwd__HOME-DELL-DESKTOP.json
+--- PASS: TestDFRLTwoNodeTxPathDiverges (0.03s)
+PASS
+ok  	github.com/ethereum/go-ethereum/eth/catalyst	17.555s
+# launched via: go test
+# exit=0
+
+  A'  transaction entry point, float path -> ap__seq-fwd__HOME-DELL-DESKTOP.json
+########## publish b  (B   transaction entry point, specified path)
+# build tags: e3lite_vulnerable
+# test:       TestDFRLTwoNodeDeterministicPathAgrees
+# env:        DFRL_DET_OUT=/c/Users/wangt/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/same-order-20260918/b__seq-fwd__HOME-DELL-DESKTOP.json
+=== RUN   TestDFRLTwoNodeDeterministicPathAgrees
+    api_dfrl_defence_test.go:220: compiled accumulation order: seq-fwd (unused on the specified path)
+    api_dfrl_defence_test.go:221: genesis hash 0x8e49dc4f2a70fb3cee5308b233170179ce25f63bc678b85f7369000963a62fd7; 3 submissions + 1 aggregation call through 0x0000000000000000000000000000000000C0FFEE
+    api_dfrl_defence_test.go:229: own payload: number 1 4 txs state root 0xec27ebf647dca89f1dc1ad0e5ddc69e20a39572329261681c21b9da05b1c1eeb block hash 0x6479a2cc226b9088f9bd9a5e29439b620476ee0e5db43b8854c1aab020bbc05e
+    api_dfrl_defence_test.go:236: control: own payload is VALID on its own builder
+    api_dfrl_defence_test.go:239: wrote own envelope to C:/Users/wangt/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/same-order-20260918/b__seq-fwd__HOME-DELL-DESKTOP.json
+--- PASS: TestDFRLTwoNodeDeterministicPathAgrees (0.03s)
+PASS
+ok  	github.com/ethereum/go-ethereum/eth/catalyst	17.679s
+# launched via: go test
+# exit=0
+
+  B   transaction entry point, specified path -> b__seq-fwd__HOME-DELL-DESKTOP.json
+
+== waiting for the peer and judging ==
+  A   mandatory system call, float path <- a__seq-fwd__ttwang-surface.json
+     peer windows/arm64 vs this host windows/amd64
+     More than the order varies between these hosts, so this cell is
+     asymmetric: agreement is STRONGER than a same-architecture pass,
+     while a disagreement is inconclusive -- architecture alone has
+     been measured to move the unspecified path. Read the ATTRIBUTION
+     line on success; on failure, do not read it as a refutation.
+     note: peer built with go1.26.7, this host with go1.26.5.
+########## judge a  (A   mandatory system call, float path)
+# build tags: e3lite_vulnerable
+# test:       TestDFRLTwoNodePayloadExchange
+# env:        DFRL_PAYLOAD_IN=/c/Users/wangt/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/same-order-20260918/a__seq-fwd__ttwang-surface.json DFRL_XM_EXPECT=same-order
+=== RUN   TestDFRLTwoNodePayloadExchange
+    api_dfrl_exchange_test.go:118: compiled accumulation order: seq-fwd
+    api_dfrl_exchange_test.go:119: genesis hash 0xfd0c765adad518155e4b0c94ef6e5c1af63f0c429d7b95870ec0d4c3fd55d0df; building over parent 0 (0xfd0c765adad518155e4b0c94ef6e5c1af63f0c429d7b95870ec0d4c3fd55d0df)
+    api_dfrl_exchange_test.go:124: own payload: number 1 state root 0xca056024dffbc5d470a7323eca05ce912745985bd4eb77b60f2e2597f0a1f3fc block hash 0x09d9be89f47c4033ba2d4721b8a3962bbed4428cdf7e0b026a7f469a33c90f36
+    api_dfrl_exchange_test.go:132: control: own payload is VALID on its own builder
+    api_dfrl_exchange_test.go:140: peer envelope from C:/Users/wangt/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/same-order-20260918/a__seq-fwd__ttwang-surface.json
+    api_dfrl_exchange_test.go:140:   order seq-fwd  host ttwang-surface (windows/arm64, go1.26.7, 12 cpu)
+    api_dfrl_exchange_test.go:140:   state root 0xca056024dffbc5d470a7323eca05ce912745985bd4eb77b60f2e2597f0a1f3fc  block hash 0xd792d3275f593f9a9d9cae14469fbd416d06ceadc1aa27e0db29fff33fb2dc7a
+    api_dfrl_exchange_test.go:140: same-order cell: seq-fwd on windows/arm64 vs windows/amd64
+    api_dfrl_exchange_test.go:140:   the two hosts also differ in architecture, so agreement here is stronger than a same-architecture pass, and a disagreement would be inconclusive rather than a refutation
+    api_dfrl_exchange_test.go:140: identical post-state root: 0xca056024dffbc5d470a7323eca05ce912745985bd4eb77b60f2e2597f0a1f3fc
+    api_dfrl_exchange_test.go:140: ATTRIBUTION: seq-fwd compiled on windows/arm64 (go1.26.7, 12 cpu) and on windows/amd64 (go1.26.5, 16 cpu) committed the SAME post-state root. Architecture, toolchain and core count all varied and the commitment did not move, so the divergence seen when the order differs is attributable to the order and not to the host. Scope: this holds for seq-fwd. Host-stability is a property of the order, not of the pipeline -- the other order has to be tested separately and may well be host-sensitive.
+    api_dfrl_exchange_test.go:140: peer payload verdict: VALID (<nil>)
+    api_dfrl_exchange_test.go:140: RESULT: seq-fwd node (windows/arm64) and seq-fwd node (windows/amd64) agree byte for byte and accept each other
+--- PASS: TestDFRLTwoNodePayloadExchange (0.02s)
+PASS
+ok  	github.com/ethereum/go-ethereum/eth/catalyst	15.759s
+# launched via: go test
+# exit=0
+
+     verdict as expected
+  A'  transaction entry point, float path <- ap__seq-fwd__ttwang-surface.json
+     peer windows/arm64 vs this host windows/amd64
+     More than the order varies between these hosts, so this cell is
+     asymmetric: agreement is STRONGER than a same-architecture pass,
+     while a disagreement is inconclusive -- architecture alone has
+     been measured to move the unspecified path. Read the ATTRIBUTION
+     line on success; on failure, do not read it as a refutation.
+     note: peer built with go1.26.7, this host with go1.26.5.
+########## judge ap  (A'  transaction entry point, float path)
+# build tags: e3lite_vulnerable
+# test:       TestDFRLTwoNodeTxPathDiverges
+# env:        DFRL_TXV_IN=/c/Users/wangt/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/same-order-20260918/ap__seq-fwd__ttwang-surface.json DFRL_XM_EXPECT=same-order
+=== RUN   TestDFRLTwoNodeTxPathDiverges
+    api_dfrl_txpath_test.go:119: compiled accumulation order: seq-fwd
+    api_dfrl_txpath_test.go:120: genesis hash 0x1237722a3af3553967a71965c9bf7106c6dcd689d2b6623fcd26ae1821cde202; one agg() call through 0x0000000000000000000000000000000000Badf10 carrying the three submissions as calldata
+    api_dfrl_txpath_test.go:128: own payload: number 1 1 tx state root 0x57e6611675f10fc6c83ea3d15ccdb062ac2a95e3eb1e9d9b1caf1483ab3ac343 block hash 0xd767e874c306a06a14a1688b9b043201f527a20e816d56261767607976640e9a
+    api_dfrl_txpath_test.go:134: control: own payload is VALID on its own builder
+    api_dfrl_txpath_test.go:142: peer envelope from C:/Users/wangt/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/same-order-20260918/ap__seq-fwd__ttwang-surface.json
+    api_dfrl_txpath_test.go:142:   order seq-fwd  host ttwang-surface (windows/arm64, go1.26.7, 12 cpu)
+    api_dfrl_txpath_test.go:142:   state root 0x57e6611675f10fc6c83ea3d15ccdb062ac2a95e3eb1e9d9b1caf1483ab3ac343  block hash 0xf1934f811532ac5952e9da002a88868bb5ada9d8130c5207de0826d2e5a1da60
+    api_dfrl_txpath_test.go:142: same-order cell: seq-fwd on windows/arm64 vs windows/amd64
+    api_dfrl_txpath_test.go:142:   the two hosts also differ in architecture, so agreement here is stronger than a same-architecture pass, and a disagreement would be inconclusive rather than a refutation
+    api_dfrl_txpath_test.go:142: both nodes built byte-identical transaction lists (1 txs)
+    api_dfrl_txpath_test.go:142: identical post-state root: 0x57e6611675f10fc6c83ea3d15ccdb062ac2a95e3eb1e9d9b1caf1483ab3ac343
+    api_dfrl_txpath_test.go:142: ATTRIBUTION: seq-fwd compiled on windows/arm64 (go1.26.7, 12 cpu) and on windows/amd64 (go1.26.5, 16 cpu) committed the SAME post-state root. Architecture, toolchain and core count all varied and the commitment did not move, so the divergence seen when the order differs is attributable to the order and not to the host. Scope: this holds for seq-fwd. Host-stability is a property of the order, not of the pipeline -- the other order has to be tested separately and may well be host-sensitive.
+    api_dfrl_txpath_test.go:142: peer payload verdict: VALID (<nil>)
+    api_dfrl_txpath_test.go:142: RESULT: seq-fwd node (windows/arm64) and seq-fwd node (windows/amd64) agree byte for byte and accept each other
+--- PASS: TestDFRLTwoNodeTxPathDiverges (0.03s)
+PASS
+ok  	github.com/ethereum/go-ethereum/eth/catalyst	15.972s
+# launched via: go test
+# exit=0
+
+     verdict as expected
+  B   transaction entry point, specified path <- b__seq-fwd__ttwang-surface.json
+     peer windows/arm64 vs this host windows/amd64
+     More than the order varies between these hosts, so this cell is
+     asymmetric: agreement is STRONGER than a same-architecture pass,
+     while a disagreement is inconclusive -- architecture alone has
+     been measured to move the unspecified path. Read the ATTRIBUTION
+     line on success; on failure, do not read it as a refutation.
+     note: peer built with go1.26.7, this host with go1.26.5.
+########## judge b  (B   transaction entry point, specified path)
+# build tags: e3lite_vulnerable
+# test:       TestDFRLTwoNodeDeterministicPathAgrees
+# env:        DFRL_DET_IN=/c/Users/wangt/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/same-order-20260918/b__seq-fwd__ttwang-surface.json DFRL_XM_EXPECT=same-order
+=== RUN   TestDFRLTwoNodeDeterministicPathAgrees
+    api_dfrl_defence_test.go:220: compiled accumulation order: seq-fwd (unused on the specified path)
+    api_dfrl_defence_test.go:221: genesis hash 0x8e49dc4f2a70fb3cee5308b233170179ce25f63bc678b85f7369000963a62fd7; 3 submissions + 1 aggregation call through 0x0000000000000000000000000000000000C0FFEE
+    api_dfrl_defence_test.go:229: own payload: number 1 4 txs state root 0xec27ebf647dca89f1dc1ad0e5ddc69e20a39572329261681c21b9da05b1c1eeb block hash 0x6479a2cc226b9088f9bd9a5e29439b620476ee0e5db43b8854c1aab020bbc05e
+    api_dfrl_defence_test.go:236: control: own payload is VALID on its own builder
+    api_dfrl_defence_test.go:244: peer envelope from C:/Users/wangt/Dropbox/ProjectsWorkingSpace/silent-forks/xm-exchange/same-order-20260918/b__seq-fwd__ttwang-surface.json
+    api_dfrl_defence_test.go:244:   order seq-fwd  host ttwang-surface (windows/arm64, go1.26.7, 12 cpu)
+    api_dfrl_defence_test.go:244:   state root 0xec27ebf647dca89f1dc1ad0e5ddc69e20a39572329261681c21b9da05b1c1eeb  block hash 0x71c0eb6a8efcce7f9e8febf87aaa032ba3c19c775f13446264dc45e99ffcaac0
+    api_dfrl_defence_test.go:244: same-order cell: seq-fwd on windows/arm64 vs windows/amd64
+    api_dfrl_defence_test.go:244:   the two hosts also differ in architecture, so agreement here is stronger than a same-architecture pass, and a disagreement would be inconclusive rather than a refutation
+    api_dfrl_defence_test.go:244: both nodes built byte-identical transaction lists (4 txs)
+    api_dfrl_defence_test.go:244: identical post-state root: 0xec27ebf647dca89f1dc1ad0e5ddc69e20a39572329261681c21b9da05b1c1eeb
+    api_dfrl_defence_test.go:244: ATTRIBUTION: seq-fwd compiled on windows/arm64 (go1.26.7, 12 cpu) and on windows/amd64 (go1.26.5, 16 cpu) committed the SAME post-state root. Architecture, toolchain and core count all varied and the commitment did not move, so the divergence seen when the order differs is attributable to the order and not to the host. Scope: this holds for seq-fwd. Host-stability is a property of the order, not of the pipeline -- the other order has to be tested separately and may well be host-sensitive.
+    api_dfrl_defence_test.go:244: peer payload verdict: VALID (<nil>)
+    api_dfrl_defence_test.go:244: RESULT: seq-fwd node (windows/arm64) and seq-fwd node (windows/amd64) agree byte for byte and accept each other
+--- PASS: TestDFRLTwoNodeDeterministicPathAgrees (0.03s)
+PASS
+ok  	github.com/ethereum/go-ethereum/eth/catalyst	15.824s
+# launched via: go test
+# exit=0
+
+     verdict as expected
+########## summary (HOME-DELL-DESKTOP, cell same-order)
+api_dfrl_exchange_test.go:118: compiled accumulation order: seq-fwd
+api_dfrl_exchange_test.go:124: own payload: number 1 state root 0xca056024dffbc5d470a7323eca05ce912745985bd4eb77b60f2e2597f0a1f3fc block hash 0x09d9be89f47c4033ba2d4721b8a3962bbed4428cdf7e0b026a7f469a33c90f36
+api_dfrl_exchange_test.go:132: control: own payload is VALID on its own builder
+api_dfrl_txpath_test.go:119: compiled accumulation order: seq-fwd
+api_dfrl_txpath_test.go:128: own payload: number 1 1 tx state root 0x57e6611675f10fc6c83ea3d15ccdb062ac2a95e3eb1e9d9b1caf1483ab3ac343 block hash 0xd767e874c306a06a14a1688b9b043201f527a20e816d56261767607976640e9a
+api_dfrl_txpath_test.go:134: control: own payload is VALID on its own builder
+api_dfrl_defence_test.go:220: compiled accumulation order: seq-fwd (unused on the specified path)
+api_dfrl_defence_test.go:229: own payload: number 1 4 txs state root 0xec27ebf647dca89f1dc1ad0e5ddc69e20a39572329261681c21b9da05b1c1eeb block hash 0x6479a2cc226b9088f9bd9a5e29439b620476ee0e5db43b8854c1aab020bbc05e
+api_dfrl_defence_test.go:236: control: own payload is VALID on its own builder
+api_dfrl_exchange_test.go:118: compiled accumulation order: seq-fwd
+api_dfrl_exchange_test.go:124: own payload: number 1 state root 0xca056024dffbc5d470a7323eca05ce912745985bd4eb77b60f2e2597f0a1f3fc block hash 0x09d9be89f47c4033ba2d4721b8a3962bbed4428cdf7e0b026a7f469a33c90f36
+api_dfrl_exchange_test.go:132: control: own payload is VALID on its own builder
+api_dfrl_exchange_test.go:140:   order seq-fwd  host ttwang-surface (windows/arm64, go1.26.7, 12 cpu)
+api_dfrl_exchange_test.go:140: identical post-state root: 0xca056024dffbc5d470a7323eca05ce912745985bd4eb77b60f2e2597f0a1f3fc
+api_dfrl_exchange_test.go:140: ATTRIBUTION: seq-fwd compiled on windows/arm64 (go1.26.7, 12 cpu) and on windows/amd64 (go1.26.5, 16 cpu) committed the SAME post-state root. Architecture, toolchain and core count all varied and the commitment did not move, so the divergence seen when the order differs is attributable to the order and not to the host. Scope: this holds for seq-fwd. Host-stability is a property of the order, not of the pipeline -- the other order has to be tested separately and may well be host-sensitive.
+api_dfrl_exchange_test.go:140: peer payload verdict: VALID (<nil>)
+api_dfrl_exchange_test.go:140: RESULT: seq-fwd node (windows/arm64) and seq-fwd node (windows/amd64) agree byte for byte and accept each other
+api_dfrl_txpath_test.go:119: compiled accumulation order: seq-fwd
+api_dfrl_txpath_test.go:128: own payload: number 1 1 tx state root 0x57e6611675f10fc6c83ea3d15ccdb062ac2a95e3eb1e9d9b1caf1483ab3ac343 block hash 0xd767e874c306a06a14a1688b9b043201f527a20e816d56261767607976640e9a
+api_dfrl_txpath_test.go:134: control: own payload is VALID on its own builder
+api_dfrl_txpath_test.go:142:   order seq-fwd  host ttwang-surface (windows/arm64, go1.26.7, 12 cpu)
+api_dfrl_txpath_test.go:142: both nodes built byte-identical transaction lists (1 txs)
+api_dfrl_txpath_test.go:142: identical post-state root: 0x57e6611675f10fc6c83ea3d15ccdb062ac2a95e3eb1e9d9b1caf1483ab3ac343
+api_dfrl_txpath_test.go:142: ATTRIBUTION: seq-fwd compiled on windows/arm64 (go1.26.7, 12 cpu) and on windows/amd64 (go1.26.5, 16 cpu) committed the SAME post-state root. Architecture, toolchain and core count all varied and the commitment did not move, so the divergence seen when the order differs is attributable to the order and not to the host. Scope: this holds for seq-fwd. Host-stability is a property of the order, not of the pipeline -- the other order has to be tested separately and may well be host-sensitive.
+api_dfrl_txpath_test.go:142: peer payload verdict: VALID (<nil>)
+api_dfrl_txpath_test.go:142: RESULT: seq-fwd node (windows/arm64) and seq-fwd node (windows/amd64) agree byte for byte and accept each other
+api_dfrl_defence_test.go:220: compiled accumulation order: seq-fwd (unused on the specified path)
+api_dfrl_defence_test.go:229: own payload: number 1 4 txs state root 0xec27ebf647dca89f1dc1ad0e5ddc69e20a39572329261681c21b9da05b1c1eeb block hash 0x6479a2cc226b9088f9bd9a5e29439b620476ee0e5db43b8854c1aab020bbc05e
+api_dfrl_defence_test.go:236: control: own payload is VALID on its own builder
+api_dfrl_defence_test.go:244:   order seq-fwd  host ttwang-surface (windows/arm64, go1.26.7, 12 cpu)
+api_dfrl_defence_test.go:244: both nodes built byte-identical transaction lists (4 txs)
+api_dfrl_defence_test.go:244: identical post-state root: 0xec27ebf647dca89f1dc1ad0e5ddc69e20a39572329261681c21b9da05b1c1eeb
+api_dfrl_defence_test.go:244: ATTRIBUTION: seq-fwd compiled on windows/arm64 (go1.26.7, 12 cpu) and on windows/amd64 (go1.26.5, 16 cpu) committed the SAME post-state root. Architecture, toolchain and core count all varied and the commitment did not move, so the divergence seen when the order differs is attributable to the order and not to the host. Scope: this holds for seq-fwd. Host-stability is a property of the order, not of the pipeline -- the other order has to be tested separately and may well be host-sensitive.
+api_dfrl_defence_test.go:244: peer payload verdict: VALID (<nil>)
+api_dfrl_defence_test.go:244: RESULT: seq-fwd node (windows/arm64) and seq-fwd node (windows/amd64) agree byte for byte and accept each other
+
+
+same-order cell passed on HOME-DELL-DESKTOP: two physical hosts compiling the same
+accumulation order produce identical commitments and accept each other's
+blocks on all three paths, the unspecified float paths included.
+Together with the differ cell, the divergence is attributable to the
+compiled order rather than to the machine.
+
+log: /c/Users/wangt/Dropbox/ProjectsWorkingSpace/silent-forks/evidence/two_node_payload_exchange_xm_same-order_HOME-DELL-DESKTOP_seq-fwd.log
+The peer host writes its own log; both are needed, since each side's log
+records only the verdicts that side reached.

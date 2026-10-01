@@ -1,0 +1,7 @@
+/dfrl-agg
+/dfrl-agg.exe
+*.test
+*.out
+diverge-*.txt
+fp-numpy-*.txt
+__pycache__/

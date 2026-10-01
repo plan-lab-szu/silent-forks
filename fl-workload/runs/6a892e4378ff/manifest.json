@@ -1,0 +1,39 @@
+{
+  "config": {
+    "alpha": 0.5,
+    "batch": 64,
+    "clients": 10,
+    "data": "mnist",
+    "data_root": null,
+    "hidden": 314,
+    "local_epochs": 1,
+    "lr": 0.1,
+    "model": "logreg",
+    "rounds": 60,
+    "seed": 1,
+    "strategies": "seq-fwd,seq-rev"
+  },
+  "git_commit": "6dde2b105e136ee024790623cd8ef08d25798b69",
+  "libraries": {
+    "numpy": "2.5.1",
+    "python": "3.12.10",
+    "scipy": "1.18.0",
+    "torch": "2.13.0+cpu"
+  },
+  "platform": {
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 158 Stepping 13, GenuineIntel",
+    "release": "11",
+    "system": "Windows"
+  },
+  "results": {
+    "first_round_with_accuracy_difference": null,
+    "first_round_with_distinct_roots": 0,
+    "max_param_distance_first": 2.9802322387695312e-08,
+    "max_param_distance_last": 6.854534149169922e-07,
+    "param_distance_growth_factor": 23.0,
+    "worst_accuracy_spread": 0.0
+  },
+  "run_id": "6a892e4378ff",
+  "timestamp": null
+}

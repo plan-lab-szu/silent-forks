@@ -1,0 +1,18 @@
+# TestFloatDivergenceReport (N=10, P=50000) - GitHub Actions native linux/arm64
+# archived CI run 33165552283, 2026-08-28
+# Source for the \xC2\xA74.1 and \xC2\xA74.4 numbers.
+
+divergence (ubuntu-24.04-arm)	run TestFloatDivergenceReport	﻿2026-08-28T11:01:31.2847350Z ##[group]Run go test -run TestFloatDivergenceReport -v ./...
+=== RUN   TestFloatDivergenceReport
+floatref_test.go:27: platform linux/arm64, N=10 P=50000
+floatref_test.go:39:   seq-fwd      root=a9990327dc08fa20 differs=0
+floatref_test.go:39:   seq-rev      root=27a9285f3cc0609e differs=30369
+floatref_test.go:39:   pairwise     root=03d8708507ba236c differs=23132
+floatref_test.go:39:   blocked-4    root=55b3d41d95e33bd4 differs=21437
+floatref_test.go:39:   float64-acc  root=7b32684ba98752f1 differs=32212
+floatref_test.go:39:   fused-mul    root=90c7ebd76e9e12a7 differs=25633
+floatref_test.go:41: 6 strategies -> 6 distinct state roots
+--- PASS: TestFloatDivergenceReport (0.01s)
+PASS
+ok  	dfrl-agg	0.013s
+?   	dfrl-agg/cmd/dfrl-agg	[no test files]

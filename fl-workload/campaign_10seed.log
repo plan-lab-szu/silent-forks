@@ -1,0 +1,28 @@
+campaign 874fd18b0d4e | logreg | 10 seeds x 20 rounds | arms: centralized, fed-int, fed-float
+  seed  1  centralized=0.9245(conv=0) fed-int=0.9089(conv=8) fed-float=0.9089(conv=8)
+  seed  2  centralized=0.9241(conv=0) fed-int=0.9105(conv=9) fed-float=0.9105(conv=9)
+  seed  3  centralized=0.9254(conv=0) fed-int=0.9091(conv=9) fed-float=0.9091(conv=9)
+  seed  4  centralized=0.9250(conv=0) fed-int=0.9079(conv=9) fed-float=0.9079(conv=9)
+  seed  5  centralized=0.9233(conv=0) fed-int=0.9097(conv=10) fed-float=0.9097(conv=10)
+  seed  6  centralized=0.9246(conv=0) fed-int=0.9099(conv=7) fed-float=0.9099(conv=7)
+  seed  7  centralized=0.9239(conv=0) fed-int=0.9091(conv=9) fed-float=0.9091(conv=9)
+  seed  8  centralized=0.9227(conv=0) fed-int=0.9077(conv=10) fed-float=0.9077(conv=10)
+  seed  9  centralized=0.9241(conv=0) fed-int=0.9083(conv=7) fed-float=0.9083(conv=7)
+  seed 10  centralized=0.9227(conv=0) fed-int=0.9064(conv=11) fed-float=0.9064(conv=11)
+
+arm            final acc (mean +/- 95% CI)  rounds to 0.90
+centralized    0.9240 +/- 0.0007            0.0 (10/10 seeds)
+fed-int        0.9088 +/- 0.0009            8.9 (10/10 seeds)
+fed-float      0.9088 +/- 0.0009            8.9 (10/10 seeds)
+
+fed-int_vs_centralized: mean diff -0.01528, 95% CI [-0.01611, -0.01445]
+    paired t p=1.294e-11   wilcoxon p=0.001953
+
+fed-int_vs_fed-float: mean diff +0.00000, 95% CI [+0.00000, +0.00000]
+    paired t p=nan   wilcoxon p=n/a   (all paired differences are exactly zero)
+
+fed-float: [5] chains -> [4] distinct state roots
+    worst accuracy spread across chains: 0.00000
+    mean max pairwise parameter distance, final round: 3.248e-07
+
+wrote runs\874fd18b0d4e

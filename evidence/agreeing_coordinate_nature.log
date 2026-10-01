@@ -1,0 +1,17 @@
+=== RUN   TestNatureOfAgreeingCoordinates
+    agreeing_coord_nature_test.go:72: round 0: 1990 agreeing / 5860 splitting coordinates (P=7850)
+    agreeing_coord_nature_test.go:74:     of the agreeing ones: 0 have all ten client scalars exactly zero, 397 have all ten identical (19.9% of agreeing)
+    agreeing_coord_nature_test.go:78:     client-scalar spread (max-min) at agreeing  coordinates: n=1990  zero-spread=397 (19.9%)  median=0.00527  q75=0.0446  max=0.267  mean=0.0278
+    agreeing_coord_nature_test.go:79:     client-scalar spread (max-min) at splitting coordinates: n=5860  zero-spread=294 (5.0%)  median=0.0229  q75=0.0582  max=0.324  mean=0.0371
+    agreeing_coord_nature_test.go:72: round 2: 2011 agreeing / 5839 splitting coordinates (P=7850)
+    agreeing_coord_nature_test.go:74:     of the agreeing ones: 0 have all ten client scalars exactly zero, 437 have all ten identical (21.7% of agreeing)
+    agreeing_coord_nature_test.go:78:     client-scalar spread (max-min) at agreeing  coordinates: n=2011  zero-spread=437 (21.7%)  median=0.0031  q75=0.0254  max=0.277  mean=0.0151
+    agreeing_coord_nature_test.go:79:     client-scalar spread (max-min) at splitting coordinates: n=5839  zero-spread=318 (5.4%)  median=0.012  q75=0.0319  max=0.154  mean=0.0196
+    agreeing_coord_nature_test.go:72: round 4: 2082 agreeing / 5768 splitting coordinates (P=7850)
+    agreeing_coord_nature_test.go:74:     of the agreeing ones: 0 have all ten client scalars exactly zero, 462 have all ten identical (22.2% of agreeing)
+    agreeing_coord_nature_test.go:78:     client-scalar spread (max-min) at agreeing  coordinates: n=2082  zero-spread=462 (22.2%)  median=0.00258  q75=0.0219  max=0.134  mean=0.0129
+    agreeing_coord_nature_test.go:79:     client-scalar spread (max-min) at splitting coordinates: n=5768  zero-spread=338 (5.9%)  median=0.0108  q75=0.0287  max=0.255  mean=0.0174
+--- PASS: TestNatureOfAgreeingCoordinates (0.15s)
+PASS
+ok  	dfrl-agg	(cached)
+?   	dfrl-agg/cmd/dfrl-agg	[no test files]

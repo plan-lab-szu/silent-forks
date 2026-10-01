@@ -1,0 +1,25 @@
+# Mandatory-aggregation system call: aggregation scheduled by block height, not carried by a transaction.
+# Produced 2026-09-01 on windows/amd64, Go go1.26.5, geth pin 02b73d4e.
+# Implementation: params.ChainConfig.DFRLAggregationInterval + core.ProcessDFRLAggregation,
+# invoked from core.PreExecution on the EIP-4788 ProcessBeaconBlockRoot pattern.
+
+=== RUN   TestDFRLAggregationIsMandatory
+=== RUN   TestDFRLAggregationIsMandatory/runs_at_a_boundary_with_no_transactions
+    state_processor_dfrl_test.go:119: height 64: aggregation executed with zero transactions in the block, round index 1
+=== RUN   TestDFRLAggregationIsMandatory/does_not_run_off_a_boundary
+=== RUN   TestDFRLAggregationIsMandatory/does_not_run_when_the_interval_is_unset
+=== RUN   TestDFRLAggregationIsMandatory/does_not_run_before_the_DFRL_fork
+--- PASS: TestDFRLAggregationIsMandatory (0.00s)
+    --- PASS: TestDFRLAggregationIsMandatory/runs_at_a_boundary_with_no_transactions (0.00s)
+    --- PASS: TestDFRLAggregationIsMandatory/does_not_run_off_a_boundary (0.00s)
+    --- PASS: TestDFRLAggregationIsMandatory/does_not_run_when_the_interval_is_unset (0.00s)
+    --- PASS: TestDFRLAggregationIsMandatory/does_not_run_before_the_DFRL_fork (0.00s)
+=== RUN   TestDFRLAggregationReachesStateRoot
+    state_processor_dfrl_test.go:162: post-state root with mandatory aggregation    0xcf52a648cba0a00651cb468935ef8170545688bd9495630a408c2d642eb808c7
+    state_processor_dfrl_test.go:163: post-state root without it (same parent, same empty tx list) 0xa8acf07dc48f24b1555644eb90d0f8d75d2070a65f6b88d29ca434b0a0cbbf84
+    state_processor_dfrl_test.go:178: same height, same parent, no transactions, results one unit apart:
+    state_processor_dfrl_test.go:179:     implementation A post-state root 0xcf52a648cba0a00651cb468935ef8170545688bd9495630a408c2d642eb808c7
+    state_processor_dfrl_test.go:180:     implementation B post-state root 0x8dac0166cd3e91c86904e64c4dd490389963ca4522195c7ba27909a18ab9cdf9
+--- PASS: TestDFRLAggregationReachesStateRoot (0.00s)
+PASS
+ok  	github.com/ethereum/go-ethereum/core	(cached)

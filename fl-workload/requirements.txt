@@ -1,0 +1,32 @@
+# Pinned environment for the fl-workload experiments.
+#
+# These versions are not aspirational: they are what `runs/*/manifest.json`
+# recorded for the runs the paper cites (§4.2, §4.3, §4.5). Every number in
+# those sections was produced under exactly this environment, on Windows
+# AMD64 (Intel Core, Family 6 Model 158 Stepping 13). Reproducing them needs
+# the same versions -- numpy and torch link different BLAS/oneDNN backends
+# across releases and across CPU architectures, and which backend is linked
+# is precisely what the paper shows decides the state root.
+#
+#   python 3.12.10
+#
+numpy==2.5.1
+scipy==1.18.0
+torch==2.13.0+cpu
+threadpoolctl==3.6.0
+
+# --------------------------------------------------------------------------
+# SECOND ENVIRONMENT, required for the library-version finding only (§4.2).
+#
+# That experiment is a comparison BETWEEN two numpy releases: BLAS-backed dot
+# product differs from sequential accumulation in 92,552 of 250,000 parameters
+# under numpy 2.5.1, and agrees exactly under numpy 1.26.4 -- same code, same
+# input, same machine. It therefore cannot run in one environment. Create a
+# second venv identical to the above except:
+#
+#   numpy==1.26.4
+#
+# and run floatpipe.py in each, comparing the reported state roots. There is
+# no automation for this; it was done by hand, and the handoff should say so
+# rather than imply a one-command reproduction exists.
+# --------------------------------------------------------------------------

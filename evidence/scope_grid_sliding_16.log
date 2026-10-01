@@ -1,0 +1,12 @@
+=== RUN   TestScopeGridSixteenCoordinateWindows
+    scope_grid_test.go:193: logreg_seed1   model=logreg seed=1 rounds=60  sliding P'=16: 0 agreeing of 470100 window positions
+    scope_grid_test.go:193: logreg_seed2   model=logreg seed=2 rounds=60  sliding P'=16: 0 agreeing of 470100 window positions
+    scope_grid_test.go:193: logreg_seed3   model=logreg seed=3 rounds=60  sliding P'=16: 0 agreeing of 470100 window positions
+    scope_grid_test.go:193: mlp_seed1      model=mlp    seed=1 rounds=5   sliding P'=16: 0 agreeing of 1248125 window positions
+    scope_grid_test.go:193: mlp_seed2      model=mlp    seed=2 rounds=5   sliding P'=16: 0 agreeing of 1248125 window positions
+    scope_grid_test.go:193: mlp_seed3      model=mlp    seed=3 rounds=5   sliding P'=16: 0 agreeing of 1248125 window positions
+    scope_grid_test.go:196: grid total: 195 cells, 5154675 window positions examined, 0 agreements (worst single round: 0)
+--- PASS: TestScopeGridSixteenCoordinateWindows (37.72s)
+PASS
+ok  	dfrl-agg	38.115s
+?   	dfrl-agg/cmd/dfrl-agg	[no test files]

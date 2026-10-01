@@ -1,0 +1,112 @@
+{
+  "config": {
+    "alpha": 0.5,
+    "arms": "centralized,fed-int,fed-float",
+    "backend": "go",
+    "batch": 64,
+    "clients": 10,
+    "data": "mnist",
+    "data_root": null,
+    "hidden": 314,
+    "local_epochs": 1,
+    "lr": 0.1,
+    "model": "logreg",
+    "rounds": 5,
+    "seeds": 3,
+    "threshold": 0.88
+  },
+  "git_commit": null,
+  "libraries": {
+    "numpy": "2.5.1",
+    "python": "3.12.10",
+    "scipy": "1.18.0",
+    "torch": "2.13.0+cpu"
+  },
+  "platform": {
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 158 Stepping 13, GenuineIntel",
+    "release": "11",
+    "system": "Windows"
+  },
+  "results": {
+    "comparisons": {
+      "fed-int_vs_centralized": {
+        "ci": [
+          -0.0335754828438128,
+          -0.029824517156187166
+        ],
+        "ci_half_width": 0.0018754828438128182,
+        "mean_diff": -0.031699999999999985,
+        "n": 3,
+        "ttest_rel_p": 0.00018902181381084604,
+        "wilcoxon_p": 0.25
+      },
+      "fed-int_vs_fed-float": {
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "ci_half_width": 0.0,
+        "mean_diff": 0.0,
+        "n": 3,
+        "ttest_rel_p": NaN,
+        "wilcoxon_note": "all paired differences are exactly zero",
+        "wilcoxon_p": null
+      }
+    },
+    "summary": {
+      "centralized": {
+        "conv_round": {
+          "ci95_half": 0.0,
+          "mean": 0.0,
+          "n_converged": 3,
+          "n_total": 3
+        },
+        "final_acc": {
+          "ci95_half": 0.0007589166067194187,
+          "mean": 0.9206666666666666,
+          "n": 3
+        }
+      },
+      "fed-float": {
+        "conv_round": {
+          "ci95_half": 0.0,
+          "mean": 3.0,
+          "n_converged": 3,
+          "n_total": 3
+        },
+        "final_acc": {
+          "ci95_half": 0.002170365022406243,
+          "mean": 0.8889666666666667,
+          "n": 3
+        },
+        "float_detail": {
+          "distinct_roots_final": [
+            4
+          ],
+          "mean_max_param_distance_final": 1.4901161193847656e-07,
+          "n_chains": [
+            5
+          ],
+          "worst_accuracy_spread": 0.0
+        }
+      },
+      "fed-int": {
+        "conv_round": {
+          "ci95_half": 0.0,
+          "mean": 3.0,
+          "n_converged": 3,
+          "n_total": 3
+        },
+        "final_acc": {
+          "ci95_half": 0.002170365022406243,
+          "mean": 0.8889666666666667,
+          "n": 3
+        }
+      }
+    },
+    "threshold": 0.88
+  },
+  "run_id": "df074155fbd1",
+  "timestamp": "T"
+}

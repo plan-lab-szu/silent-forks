@@ -1,0 +1,25 @@
+{
+  "config": {
+    "clients": 10,
+    "rounds": 15,
+    "adversarial": [
+      2,
+      7
+    ],
+    "k": 2,
+    "model": "logreg",
+    "dims": [
+      7850
+    ]
+  },
+  "fedavg-attacked": {
+    "diverged": true,
+    "diverged_at_round": 13,
+    "error": "parameter out of range: np.float32(16.799803)",
+    "final_test_acc": null
+  },
+  "trimmed-attacked": {
+    "diverged": false,
+    "final_test_acc": 0.8997
+  }
+}

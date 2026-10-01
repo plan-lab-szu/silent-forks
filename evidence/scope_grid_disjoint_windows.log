@@ -1,0 +1,66 @@
+=== RUN   TestScopeGridDisjointWindows
+    scope_grid_test.go:156: === logreg_seed1   model=logreg seed=1 P=7850    rounds=60 backend=python
+    scope_grid_test.go:158:       full-tensor distinct commitments over 60 rounds: 5 in 60 round(s)
+    scope_grid_test.go:165:       disjoint P'=1    1990..2189 of 7850 (25.35%..27.89%)
+    scope_grid_test.go:165:       disjoint P'=2    284..352 of 3925 (7.24%..8.97%)
+    scope_grid_test.go:165:       disjoint P'=4    26..40 of 1962 (1.33%..2.04%)
+    scope_grid_test.go:165:       disjoint P'=8    2..2 of 981 (0.20%..0.20%)
+    scope_grid_test.go:162:       disjoint P'=16   0 of 490 in every round
+    scope_grid_test.go:162:       disjoint P'=32   0 of 245 in every round
+    scope_grid_test.go:162:       disjoint P'=64   0 of 122 in every round
+    scope_grid_test.go:162:       disjoint P'=256  0 of 30 in every round
+    scope_grid_test.go:156: === logreg_seed2   model=logreg seed=2 P=7850    rounds=60 backend=python
+    scope_grid_test.go:158:       full-tensor distinct commitments over 60 rounds: 5 in 60 round(s)
+    scope_grid_test.go:165:       disjoint P'=1    1766..1937 of 7850 (22.50%..24.68%)
+    scope_grid_test.go:165:       disjoint P'=2    189..245 of 3925 (4.82%..6.24%)
+    scope_grid_test.go:165:       disjoint P'=4    1..11 of 1962 (0.05%..0.56%)
+    scope_grid_test.go:162:       disjoint P'=8    0 of 981 in every round
+    scope_grid_test.go:162:       disjoint P'=16   0 of 490 in every round
+    scope_grid_test.go:162:       disjoint P'=32   0 of 245 in every round
+    scope_grid_test.go:162:       disjoint P'=64   0 of 122 in every round
+    scope_grid_test.go:162:       disjoint P'=256  0 of 30 in every round
+    scope_grid_test.go:156: === logreg_seed3   model=logreg seed=3 P=7850    rounds=60 backend=python
+    scope_grid_test.go:158:       full-tensor distinct commitments over 60 rounds: 5 in 60 round(s)
+    scope_grid_test.go:165:       disjoint P'=1    1711..1893 of 7850 (21.80%..24.11%)
+    scope_grid_test.go:165:       disjoint P'=2    180..258 of 3925 (4.59%..6.57%)
+    scope_grid_test.go:165:       disjoint P'=4    7..16 of 1962 (0.36%..0.82%)
+    scope_grid_test.go:162:       disjoint P'=8    0 of 981 in every round
+    scope_grid_test.go:162:       disjoint P'=16   0 of 490 in every round
+    scope_grid_test.go:162:       disjoint P'=32   0 of 245 in every round
+    scope_grid_test.go:162:       disjoint P'=64   0 of 122 in every round
+    scope_grid_test.go:162:       disjoint P'=256  0 of 30 in every round
+    scope_grid_test.go:156: === mlp_seed1      model=mlp    seed=1 P=249640  rounds=5 backend=python
+    scope_grid_test.go:158:       full-tensor distinct commitments over 5 rounds: 5 in 5 round(s)
+    scope_grid_test.go:165:       disjoint P'=1    59420..60977 of 249640 (23.80%..24.43%)
+    scope_grid_test.go:165:       disjoint P'=2    7318..7694 of 124820 (5.86%..6.16%)
+    scope_grid_test.go:165:       disjoint P'=4    240..288 of 62410 (0.38%..0.46%)
+    scope_grid_test.go:165:       disjoint P'=8    1..2 of 31205 (0.00%..0.01%)
+    scope_grid_test.go:162:       disjoint P'=16   0 of 15602 in every round
+    scope_grid_test.go:162:       disjoint P'=32   0 of 7801 in every round
+    scope_grid_test.go:162:       disjoint P'=64   0 of 3900 in every round
+    scope_grid_test.go:162:       disjoint P'=256  0 of 975 in every round
+    scope_grid_test.go:156: === mlp_seed2      model=mlp    seed=2 P=249640  rounds=5 backend=python
+    scope_grid_test.go:158:       full-tensor distinct commitments over 5 rounds: 5 in 5 round(s)
+    scope_grid_test.go:165:       disjoint P'=1    56546..57528 of 249640 (22.65%..23.04%)
+    scope_grid_test.go:165:       disjoint P'=2    6382..6661 of 124820 (5.11%..5.34%)
+    scope_grid_test.go:165:       disjoint P'=4    171..202 of 62410 (0.27%..0.32%)
+    scope_grid_test.go:165:       disjoint P'=8    0..1 of 31205 (0.00%..0.00%)
+    scope_grid_test.go:162:       disjoint P'=16   0 of 15602 in every round
+    scope_grid_test.go:162:       disjoint P'=32   0 of 7801 in every round
+    scope_grid_test.go:162:       disjoint P'=64   0 of 3900 in every round
+    scope_grid_test.go:162:       disjoint P'=256  0 of 975 in every round
+    scope_grid_test.go:156: === mlp_seed3      model=mlp    seed=3 P=249640  rounds=5 backend=python
+    scope_grid_test.go:158:       full-tensor distinct commitments over 5 rounds: 5 in 5 round(s)
+    scope_grid_test.go:165:       disjoint P'=1    53297..54344 of 249640 (21.35%..21.77%)
+    scope_grid_test.go:165:       disjoint P'=2    5759..6020 of 124820 (4.61%..4.82%)
+    scope_grid_test.go:165:       disjoint P'=4    121..141 of 62410 (0.19%..0.23%)
+    scope_grid_test.go:162:       disjoint P'=8    0 of 31205 in every round
+    scope_grid_test.go:162:       disjoint P'=16   0 of 15602 in every round
+    scope_grid_test.go:162:       disjoint P'=32   0 of 7801 in every round
+    scope_grid_test.go:162:       disjoint P'=64   0 of 3900 in every round
+    scope_grid_test.go:162:       disjoint P'=256  0 of 975 in every round
+    scope_grid_test.go:170: cells surveyed: 195
+--- PASS: TestScopeGridDisjointWindows (54.71s)
+PASS
+ok  	dfrl-agg	55.131s
+?   	dfrl-agg/cmd/dfrl-agg	[no test files]
